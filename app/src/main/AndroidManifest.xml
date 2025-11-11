@@ -12,9 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpacePongAppMobile">
         <activity
-            android:name=".MainActivity"
+            android:name=".RegisterActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.SpacePongAppMobile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
