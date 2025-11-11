@@ -29,6 +29,8 @@ class RegisterActivity : AppCompatActivity() {
         uriInput = findViewById(R.id.uriInput)
         registerButton = findViewById(R.id.registerButton)
 
+        disableButton()
+
         // Input listeners
         nameInput.doOnTextChanged { text, _, _, _ ->
             decideButtonVisibility()
@@ -42,5 +44,9 @@ class RegisterActivity : AppCompatActivity() {
         val isNameFilled = nameInput.text?.isNotBlank() == true
         val isUriFilled = uriInput.text?.isNotBlank() == true
         registerButton.isEnabled = isNameFilled && isUriFilled
+    }
+
+    private fun disableButton() {
+        registerButton.isEnabled = false
     }
 }
