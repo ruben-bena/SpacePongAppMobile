@@ -12,8 +12,19 @@ import com.google.android.material.textfield.TextInputEditText
 import androidx.core.widget.doOnTextChanged
 import java.net.URI
 import android.view.View
+import android.app.Activity
+import android.content.Intent
+import android.content.Context
 
 class RegisterActivity : AppCompatActivity() {
+
+    companion object {
+        fun goWaitActivity(context: Context) {
+            val intent = Intent(context, WaitActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(intent)
+        }
+    }
 
     private lateinit var nameInput: TextInputEditText
     private lateinit var uriInput: TextInputEditText
