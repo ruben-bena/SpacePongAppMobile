@@ -61,6 +61,9 @@ object WebSocketManager {
                                 val jsonObject = jsonElement
                                 var type = jsonObject["type"]?.jsonPrimitive?.contentOrNull
 
+                                if (type.equals("acceptRegister")) {
+                                    Log.d("a", "Server accepted your register. Changing to WaitActivity")
+                                }
                                 /*
                                 // Aquí se harán cosas dependiendo del tipo de mensaje que llegue
                                 if (type.equals("clients")) {
@@ -218,7 +221,7 @@ object WebSocketManager {
         webSocketClient?.send(Json.encodeToString(jsonObject))
     }
 
-    fun send(clientName: String) {
+    fun sendRegister(clientName: String) {
         var jsonObject = buildJsonObject {
             put("type", "register")
             put("clientName", clientName)

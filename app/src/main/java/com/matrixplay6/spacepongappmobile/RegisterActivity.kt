@@ -62,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
             val uri = URI(uriInput.text.toString())
             WebSocketManager.connect(uri) {
                 Log.d("CONNECTION", "Register message sent")
-                WebSocketManager.send("register", "hi")
+                WebSocketManager.sendRegister(nameInput.text.toString())
             }
         } catch (e: Exception) {
             Log.e("CONNECTION", "Invalid URI: ${e.message}")
