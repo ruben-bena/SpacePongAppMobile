@@ -1,13 +1,17 @@
 package com.matrixplay6.spacepongappmobile
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
+import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
 import androidx.core.widget.doOnTextChanged
+import java.net.URI
+import android.view.View
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -38,6 +42,8 @@ class RegisterActivity : AppCompatActivity() {
         uriInput.doOnTextChanged { text, _, _, _ ->
             decideButtonVisibility()
         }
+
+        WebSocketManager.registerActivity = this
     }
 
     private fun decideButtonVisibility() {
@@ -48,5 +54,18 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun disableButton() {
         registerButton.isEnabled = false
+    }
+
+    fun connect(view: View) {
+        WebSocketManager.username = nameInput.text.toString()
+        try {
+            val uri = URI(uriInput.text.toString())
+            WebSocketManager.connect(uri) {
+                Log.d("CONNECTION", "Register message sent")
+                WebSocketManager.send("register", "hi")
+            }
+        } catch (e: Exception) {
+            Log.e("CONNECTION", "Invalid URI: ${e.message}")
+        }
     }
 }

@@ -52,13 +52,15 @@
                     android:id="@+id/uriInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textNoSuggestions"/>
+                    android:inputType="textNoSuggestions"
+                    android:text="wss://matrixplay6.ieti.site:443"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/registerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="connect"
                 android:text="Register"/>
         </LinearLayout>
 

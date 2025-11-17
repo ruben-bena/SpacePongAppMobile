@@ -52,7 +52,7 @@ object WebSocketManager {
             }
 
             override fun onMessage(message: String?) {
-                // Log.d("CONNECTION", "Message received: " + message)
+                Log.d("CONNECTION", "Message received: " + message)
                 message?.isEmpty()?.let {
                     if (!it) {
                         if (message.trim().startsWith("{") || message.trim().startsWith("[")) {
@@ -214,6 +214,14 @@ object WebSocketManager {
         var jsonObject = buildJsonObject {
             put("type", type)
             put("message", message)
+        }
+        webSocketClient?.send(Json.encodeToString(jsonObject))
+    }
+
+    fun send(clientName: String) {
+        var jsonObject = buildJsonObject {
+            put("type", "register")
+            put("clientName", clientName)
         }
         webSocketClient?.send(Json.encodeToString(jsonObject))
     }
