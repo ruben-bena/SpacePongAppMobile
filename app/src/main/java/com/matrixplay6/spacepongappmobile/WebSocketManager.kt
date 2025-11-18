@@ -23,6 +23,7 @@ import java.net.URI
 
 object WebSocketManager {
     lateinit var appContext: Context
+    public var countdownActivity: AppCompatActivity? = null
     public var waitActivity: AppCompatActivity? = null
     public var registerActivity: AppCompatActivity? = null
 
@@ -65,6 +66,13 @@ object WebSocketManager {
                                     Log.d("a", "Server accepted your register. Changing to WaitActivity")
                                     registerActivity?.let { activity ->
                                         RegisterActivity.goWaitActivity(activity)
+                                    }
+                                }
+
+                                if (type.equals("startCountdown")) {
+                                    Log.d("a", "Server started the Countdown. Changing to CountdownActivity")
+                                    waitActivity?.let { activity ->
+                                        WaitActivity.goCountdownActivity(activity)
                                     }
                                 }
                                 /*
