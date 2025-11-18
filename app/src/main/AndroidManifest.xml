@@ -15,9 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpacePongAppMobile">
         <activity
+            android:name=".CountdownActivity"
+            android:exported="false" />
+        <activity
             android:name=".WaitActivity"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".RegisterActivity"
             android:exported="true"
