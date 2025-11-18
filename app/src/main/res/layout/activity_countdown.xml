@@ -5,13 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".CountdownActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/countdownNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CountdownActivity view"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="358dp" />
+        android:text="3"
+        android:textSize="120sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="3" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

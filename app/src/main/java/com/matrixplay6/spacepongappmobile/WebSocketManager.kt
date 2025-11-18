@@ -23,7 +23,7 @@ import java.net.URI
 
 object WebSocketManager {
     lateinit var appContext: Context
-    public var countdownActivity: AppCompatActivity? = null
+    var countdownActivity: CountdownActivity? = null
     public var waitActivity: AppCompatActivity? = null
     public var registerActivity: AppCompatActivity? = null
 
@@ -75,6 +75,16 @@ object WebSocketManager {
                                         WaitActivity.goCountdownActivity(activity)
                                     }
                                 }
+
+                                if (type == "countdown") {
+                                    val value = jsonObject["value"]?.jsonPrimitive?.intOrNull
+                                    WebSocketManager.countdownActivity?.let { activity ->
+                                        if (value != null) {
+                                            CountdownActivity.updateCountdown(activity, value)
+                                        }
+                                    }
+                                }
+
                                 /*
                                 // Aquí se harán cosas dependiendo del tipo de mensaje que llegue
                                 if (type.equals("clients")) {
