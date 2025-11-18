@@ -63,7 +63,9 @@ object WebSocketManager {
 
                                 if (type.equals("acceptRegister")) {
                                     Log.d("a", "Server accepted your register. Changing to WaitActivity")
-                                    RegisterActivity.goWaitActivity(waitActivity as Activity)
+                                    registerActivity?.let { activity ->
+                                        RegisterActivity.goWaitActivity(activity)
+                                    }
                                 }
                                 /*
                                 // Aquí se harán cosas dependiendo del tipo de mensaje que llegue

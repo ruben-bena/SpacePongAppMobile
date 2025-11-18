@@ -22,7 +22,13 @@ class RegisterActivity : AppCompatActivity() {
         fun goWaitActivity(context: Context) {
             val intent = Intent(context, WaitActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            context.startActivity(intent)
+            if (context is Activity) {
+                context.runOnUiThread {
+                    context.startActivity(intent)
+                }
+            } else {
+                context.startActivity(intent)
+            }
         }
     }
 
