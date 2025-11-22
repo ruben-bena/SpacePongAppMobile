@@ -76,8 +76,8 @@ object WebSocketManager {
                                     }
                                 }
 
-                                if (type == "countdown") {
-                                    val value = jsonObject["value"]?.jsonPrimitive?.intOrNull
+                                if (type == "remainingCountdown") {
+                                    val value = jsonObject["remainingCountdown"]?.jsonPrimitive?.intOrNull
                                     WebSocketManager.countdownActivity?.let { activity ->
                                         if (value != null) {
                                             CountdownActivity.updateCountdown(activity, value)
