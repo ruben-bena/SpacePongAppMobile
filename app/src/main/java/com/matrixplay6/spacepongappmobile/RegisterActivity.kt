@@ -15,6 +15,7 @@ import android.view.View
 import android.app.Activity
 import android.content.Intent
 import android.content.Context
+import android.widget.Toast
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -28,6 +29,14 @@ class RegisterActivity : AppCompatActivity() {
                 }
             } else {
                 context.startActivity(intent)
+            }
+        }
+
+        fun showRegisterDeniedToast(context: Context) {
+            if (context is Activity) {
+                context.runOnUiThread {
+                    Toast.makeText(context, "Name already in use. Try another one please.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
