@@ -69,7 +69,8 @@ class GameActivity : AppCompatActivity() {
         if (sliderPlayer1.isEnabled) {
             sliderPlayer1.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    val value = progress.toFloat() / maxProgress // 0..1
+                    val value =
+                        1f - progress.toFloat() / maxProgress // 0..1
                     //Log.d("SliderValue", "Slider 1 value: $value")
                     WebSocketManager.sendMoveAPP(value)
                 }
@@ -87,7 +88,7 @@ class GameActivity : AppCompatActivity() {
                     fromUser: Boolean
                 ) {
                     val value =
-                        1f - progress.toFloat() / maxProgress // invertido: 0 abajo → 1 arriba
+                        progress.toFloat() / maxProgress // invertido: 0 abajo → 1 arriba
                     //Log.d("SliderValue", "Slider 2 value: $value")
                     WebSocketManager.sendMoveAPP(value)
                 }
