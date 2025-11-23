@@ -26,6 +26,7 @@ object WebSocketManager {
     public var countdownActivity: CountdownActivity? = null
     public var waitActivity: AppCompatActivity? = null
     public var registerActivity: AppCompatActivity? = null
+    public var pendingStartGameJson: String? = null
 
     fun init(context: Context) {
         appContext = context.applicationContext
@@ -77,9 +78,6 @@ object WebSocketManager {
 
                                 if (type.equals("startCountdown")) {
                                     Log.d("a", "Server started the Countdown. Changing to CountdownActivity")
-//                                    waitActivity?.let { activity ->
-//                                        WaitActivity.goCountdownActivity(activity)
-//                                    }
                                     if (WebSocketManager.waitActivity != null) {
                                         WaitActivity.goCountdownActivity(WebSocketManager.waitActivity!!)
                                     } else if (WebSocketManager.registerActivity != null) {
@@ -98,8 +96,16 @@ object WebSocketManager {
 
                                 if (type.equals("startGame")) {
                                     Log.d("a", "Server send startGame. Changing to GameActivity")
+                                    pendingStartGameJson = message
                                     countdownActivity?.let { activity ->
                                         CountdownActivity.goGameActivity(activity)
+                                    }
+                                }
+
+                                if (type.equals("gameState")) {
+                                    // Log.d("a", "Server send gameState. Updating canvas in GameActivity")
+                                    (WebSocketManager.gameActivity as? GameActivity)?.let { activity ->
+                                        activity.updateCanvasFromJson(message)
                                     }
                                 }
                             }

@@ -16,13 +16,8 @@
         android:theme="@style/Theme.SpacePongAppMobile">
         <activity
             android:name=".GameActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CountdownActivity"
@@ -34,9 +29,14 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.SpacePongAppMobile">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

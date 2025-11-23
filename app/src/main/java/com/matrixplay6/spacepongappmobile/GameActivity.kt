@@ -6,15 +6,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.SeekBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import org.json.JSONObject
+import androidx.compose.ui.graphics.Color
 
 class GameActivity : AppCompatActivity() {
 
     private lateinit var sliderPlayer1: SeekBar
     private lateinit var sliderPlayer2: SeekBar
+    private lateinit var gameCanvas: GameCanvasView
+    lateinit var clientName: String
     private val maxProgress = 100000
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +34,11 @@ class GameActivity : AppCompatActivity() {
 
         sliderPlayer1 = findViewById<SeekBar>(R.id.sliderPlayer1)
         sliderPlayer2 = findViewById<SeekBar>(R.id.sliderPlayer2)
-
         prepareSliders()
         setupSliderListeners()
+        disableEnemySlider()
+
+        gameCanvas = findViewById(R.id.gameCanvas)
 
         WebSocketManager.gameActivity = this
     }
@@ -77,5 +84,29 @@ class GameActivity : AppCompatActivity() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+    }
+
+    fun updateCanvasFromJson(jsonString: String) {
+        this.runOnUiThread {
+            gameCanvas.updateGameState(jsonString)
+        }
+    }
+
+    fun disableEnemySlider() {
+        WebSocketManager.pendingStartGameJson?.let { json ->
+            val json = JSONObject(WebSocketManager.pendingStartGameJson)
+            val player1Name = json.getString("player1")
+
+            if (player1Name.equals(WebSocketManager.username)) {
+                sliderPlayer2.isEnabled = false
+            } else {
+                sliderPlayer1.isEnabled = false
+            }
+            val enabled1 = sliderPlayer1.isEnabled
+            val enabled2 = sliderPlayer2.isEnabled
+            Log.d("a", "sliderPlayer1.isEnabled=$enabled1, sliderPlayer2.isEnabled=$enabled2")
+
+            WebSocketManager.pendingStartGameJson = null
+        }
     }
 }
