@@ -143,6 +143,15 @@ object WebSocketManager {
         webSocketClient?.send(Json.encodeToString(jsonObject))
     }
 
+    fun sendMoveAPP(y: Float) {
+        var jsonObject = buildJsonObject {
+            put("type", "moveAPP")
+            put("y", y)
+        }
+        webSocketClient?.send(Json.encodeToString(jsonObject))
+        // Log.d("a", "Sending this to server: ${jsonObject.toString()}")
+    }
+
     fun disconnect() {
         webSocketClient?.close()
         webSocketClient = null

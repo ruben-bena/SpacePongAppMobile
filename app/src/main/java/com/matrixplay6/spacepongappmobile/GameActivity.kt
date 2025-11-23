@@ -66,24 +66,36 @@ class GameActivity : AppCompatActivity() {
     }
     fun setupSliderListeners() {
         // Slider izquierdo (normal)
-        sliderPlayer1.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val value = progress.toFloat() / maxProgress // 0..1
-                Log.d("SliderValue", "Slider 1 value: $value")
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+        if (sliderPlayer1.isEnabled) {
+            sliderPlayer1.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    val value = progress.toFloat() / maxProgress // 0..1
+                    //Log.d("SliderValue", "Slider 1 value: $value")
+                    WebSocketManager.sendMoveAPP(value)
+                }
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
+        }
 
         // Slider derecho (invertido)
-        sliderPlayer2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val value = 1f - progress.toFloat() / maxProgress // invertido: 0 abajo → 1 arriba
-                Log.d("SliderValue", "Slider 2 value: $value")
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+        if (sliderPlayer2.isEnabled) {
+            sliderPlayer2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    val value =
+                        1f - progress.toFloat() / maxProgress // invertido: 0 abajo → 1 arriba
+                    //Log.d("SliderValue", "Slider 2 value: $value")
+                    WebSocketManager.sendMoveAPP(value)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
+        }
     }
 
     fun updateCanvasFromJson(jsonString: String) {
