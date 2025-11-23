@@ -50,7 +50,7 @@ object WebSocketManager {
             }
 
             override fun onMessage(message: String?) {
-                Log.d("CONNECTION", "Message received: " + message)
+                // Log.d("CONNECTION", "Message received: " + message)
                 message?.isEmpty()?.let {
                     if (!it) {
                         if (message.trim().startsWith("{") || message.trim().startsWith("[")) {
