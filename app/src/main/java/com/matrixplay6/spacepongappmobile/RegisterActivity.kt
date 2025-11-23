@@ -32,6 +32,18 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        fun goCountdownActivity(context: Context) {
+            val intent = Intent(context, CountdownActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            if (context is Activity) {
+                context.runOnUiThread {
+                    context.startActivity(intent)
+                }
+            } else {
+                context.startActivity(intent)
+            }
+        }
+
         fun showRegisterDeniedToast(context: Context) {
             if (context is Activity) {
                 context.runOnUiThread {

@@ -77,8 +77,13 @@ object WebSocketManager {
 
                                 if (type.equals("startCountdown")) {
                                     Log.d("a", "Server started the Countdown. Changing to CountdownActivity")
-                                    waitActivity?.let { activity ->
-                                        WaitActivity.goCountdownActivity(activity)
+//                                    waitActivity?.let { activity ->
+//                                        WaitActivity.goCountdownActivity(activity)
+//                                    }
+                                    if (WebSocketManager.waitActivity != null) {
+                                        WaitActivity.goCountdownActivity(WebSocketManager.waitActivity!!)
+                                    } else if (WebSocketManager.registerActivity != null) {
+                                        RegisterActivity.goCountdownActivity(WebSocketManager.registerActivity!!)
                                     }
                                 }
 
