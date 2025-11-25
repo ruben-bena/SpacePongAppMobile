@@ -21,6 +21,18 @@ class GameCanvasView(context: Context, attrs: AttributeSet?) : View(context, att
         isAntiAlias = true
     }
 
+    private val paddleP1Paint = Paint().apply {
+        color = Color.parseColor("#00ff9c")
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
+
+    private val paddleP2Paint = Paint().apply {
+        color = Color.parseColor("#f8acff")
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
+
     private val textPaint = Paint().apply {
         color = Color.WHITE
         textSize = 100f // Tamaño base, lo ajustaremos dinámicamente si quieres
@@ -34,6 +46,13 @@ class GameCanvasView(context: Context, attrs: AttributeSet?) : View(context, att
         strokeWidth = 5f
         pathEffect = android.graphics.DashPathEffect(floatArrayOf(20f, 20f), 0f)
         style = Paint.Style.STROKE
+    }
+
+    private val borderPaint = Paint().apply {
+        color = Color.WHITE
+        style = Paint.Style.STROKE
+        strokeWidth = 8f
+        isAntiAlias = true
     }
 
     private var ballX = 0.5f
@@ -83,38 +102,39 @@ class GameCanvasView(context: Context, attrs: AttributeSet?) : View(context, att
         val w = width.toFloat()
         val h = height.toFloat()
 
-        // 1. Fondo
+        // Background
         canvas.drawRect(0f, 0f, w, h, bgPaint)
 
-        // 2. Línea central (opcional, para estética Pong)
+        // Contour
+        canvas.drawRect(0f, 0f, w, h, borderPaint)
+
+        // Central line
         canvas.drawLine(w / 2, 0f, w / 2, h, midLinePaint)
 
-        // 3. Marcador
-        // Dibujamos el texto centrado en la parte superior (al 10% de la altura)
+        // Score
         val scoreText = "$scoreP1   $scoreP2"
         canvas.drawText(scoreText, w / 2, h * 0.15f, textPaint)
 
-        // 4. Palas (Jugadores)
-        // Calculamos dimensiones en píxeles
+        // Paddles size
         val pW = w * paddleWidthRatio
         val pH = h * paddleHeightRatio
 
-        // Jugador 1 (Izquierda)
-        // X fija al margen izquierdo. Y centrada según el JSON.
+        // Paddle P1
         val p1XPos = w * paddleMarginX
-        // Restamos pH/2 porque la coordenada del JSON suele ser el CENTRO de la pala
         val p1Top = (p1Y * h) - (pH / 2)
-        canvas.drawRect(p1XPos, p1Top, p1XPos + pW, p1Top + pH, objectPaint)
+        canvas.drawRect(p1XPos, p1Top, p1XPos + pW, p1Top + pH, paddleP1Paint)
 
-        // Jugador 2 (Derecha)
+        // Paddle 2
         val p2XPos = w * (1f - paddleMarginX) - pW
         val p2Top = (p2Y * h) - (pH / 2)
-        canvas.drawRect(p2XPos, p2Top, p2XPos + pW, p2Top + pH, objectPaint)
+        canvas.drawRect(p2XPos, p2Top, p2XPos + pW, p2Top + pH, paddleP2Paint)
 
-        // 5. Bola
+        // Ball
         val bRadius = w * ballRadiusRatio
         val bX = ballX * w
         val bY = ballY * h
         canvas.drawCircle(bX, bY, bRadius, objectPaint)
+
+
     }
 }

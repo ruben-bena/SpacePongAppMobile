@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".GameActivity">
 
     <SeekBar
@@ -16,8 +17,8 @@
         android:max="100000"
         android:progress="50000"
         android:splitTrack="false"
-        android:progressDrawable="@drawable/slider_track"
-        android:thumb="@drawable/slider_thumb"
+        android:progressDrawable="@drawable/slider_track_p1"
+        android:thumb="@drawable/slider_thumb_p1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,8 +44,8 @@
         android:max="100000"
         android:progress="50000"
         android:splitTrack="false"
-        android:progressDrawable="@drawable/slider_track"
-        android:thumb="@drawable/slider_thumb"
+        android:progressDrawable="@drawable/slider_track_p2"
+        android:thumb="@drawable/slider_thumb_p2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

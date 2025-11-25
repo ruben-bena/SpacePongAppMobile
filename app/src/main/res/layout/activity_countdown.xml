@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="3"
         android:textSize="120sp"
-        android:textColor="#FFFFFF"
+        android:textColor="#00ff9c"
         android:textStyle="bold"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
